@@ -6,24 +6,17 @@ import com.google.android.gms.ads.mediation.customevent.CustomEventBannerListene
 import com.huawei.hms.ads.AdParam
 
 class HuaweiCustomBannerEventForwarder(
-    listener: CustomEventBannerListener,
-    adView: HuaweiCustomBannerView
+        private val listener: CustomEventBannerListener,
+        private val adView: HuaweiCustomBannerView
 ): HuaweiCustomBannerListener() {
-    private var listener: CustomEventBannerListener? = null
-    private var adView: HuaweiCustomBannerView? = null
-
-    init {
-        this.listener = listener
-        this.adView = adView
-    }
 
     override fun onAdLoaded() {
-        listener?.onAdLoaded(adView)
+        listener.onAdLoaded(adView)
     }
 
     override fun onAdFailed(errorCode: Int) {
         Log.e("error--",errorCode.toString())
-        listener?.onAdFailedToLoad(
+        listener.onAdFailedToLoad(
             AdError(
                 AdParam.ErrorCode.INNER,
                 AdParam.ErrorCode.INNER.toString(),"HuaweiBannerAds")
@@ -31,18 +24,18 @@ class HuaweiCustomBannerEventForwarder(
     }
 
     override fun onAdClosed() {
-        listener?.onAdClosed()
+        listener.onAdClosed()
     }
 
     override fun onAdLeave() {
-        listener?.onAdLeftApplication()
+        listener.onAdLeftApplication()
     }
 
     override fun onAdOpened() {
-        listener?.onAdOpened()
+        listener.onAdOpened()
     }
 
     override fun onAdClicked() {
-        listener?.onAdClicked()
+        listener.onAdClicked()
     }
 }
